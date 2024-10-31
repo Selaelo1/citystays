@@ -6,6 +6,11 @@ import StayDetails from "./pages/StayDetails";
 import BecomeHost from "./pages/BecomeHost";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import CategoryPage from "./pages/Categorypage";
+import Events from "./pages/Events";
+import Cars from "./pages/Cars";
+import Flights from "./pages/Flights";
+import Guides from "./pages/Guides";
 
 function App() {
   return (
@@ -20,6 +25,11 @@ function App() {
             <Route path="/become-host" element={<BecomeHost />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/category/:id" element={<CategoryPage />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/cars" element={<Cars />} />
+            <Route path="/flights" element={<Flights />} />
+            <Route path="/guides" element={<Guides />} />
           </Routes>
         </main>
       </div>
