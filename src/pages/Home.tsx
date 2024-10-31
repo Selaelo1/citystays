@@ -1,16 +1,7 @@
-// src/pages/Home.tsx
-import Hero from "../components/Hero"; // Adjust the path as necessary
+import Hero from "../components/Hero";
 import { Link } from "react-router-dom";
-import {
-  Plane,
-  Calendar,
-  Map,
-  Compass,
-  Palmtree,
-  Mountain,
-  Building,
-} from "lucide-react";
-import ExploreCard from "../components/ExploreCard";
+import Categories from "../components/Categories";
+import ExploreOptions from "../components/Exploreoptions";
 
 const africanDestinations = [
   {
@@ -43,60 +34,13 @@ const africanDestinations = [
   },
 ];
 
-const exploreOptions = [
-  {
-    title: "Book a Flight",
-    description: "Find the best deals on flights worldwide",
-    image:
-      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80",
-    link: "/flights",
-    icon: Plane,
-  },
-  {
-    title: "Book an Event",
-    description: "Discover unique experiences and activities",
-    image:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80",
-    link: "/events",
-    icon: Calendar,
-  },
-  {
-    title: "Book a Tour Guide",
-    description: "Explore with knowledgeable local guides",
-    image:
-      "https://images.unsplash.com/photo-1473625247510-8ceb1760943f?auto=format&fit=crop&q=80",
-    link: "/tours",
-    icon: Map,
-  },
-];
-
-const categories = [
-  { name: "Adventure", icon: Compass },
-  { name: "Beach", icon: Palmtree },
-  { name: "Mountain", icon: Mountain },
-  { name: "City", icon: Building },
-];
-
 export default function Home() {
   return (
     <div>
       <Hero />
 
       {/* Categories */}
-      <div className="max-w-7xl mx-auto px-4 mb-16">
-        <div className="flex justify-between items-center space-x-8">
-          {categories.map((category) => (
-            <Link
-              key={category.name}
-              to={`/category/${category.name.toLowerCase()}`}
-              className="flex-1 bg-gray-50 rounded-xl p-6 text-center hover:bg-gray-100 transition-colors"
-            >
-              <category.icon className="w-8 h-8 mx-auto mb-3" />
-              <span className="font-medium">{category.name}</span>
-            </Link>
-          ))}
-        </div>
-      </div>
+      <Categories />
 
       {/* Featured African Destinations */}
       <div className="max-w-7xl mx-auto px-4 mb-16">
@@ -128,14 +72,7 @@ export default function Home() {
       </div>
 
       {/* Explore Options */}
-      <div className="max-w-7xl mx-auto px-4 mb-16">
-        <h2 className="text-3xl font-bold mb-8">Plan Your Trip</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {exploreOptions.map((option) => (
-            <ExploreCard key={option.title} {...option} />
-          ))}
-        </div>
-      </div>
+      <ExploreOptions />
     </div>
   );
 }
