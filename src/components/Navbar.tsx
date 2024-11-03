@@ -1,22 +1,33 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, Search, User, Globe } from "lucide-react";
 import DatePicker from "./DatePicker";
 import LocationSearch from "./LocationSearch";
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const [showSearch, setShowSearch] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [searchParams, setSearchParams] = useState({
+    location: "",
+    dates: "",
+    guests: 1,
+  });
+
+  const handleSearch = () => {
+    navigate("/search", {
+      state: searchParams,
+    });
+    setShowSearch(false);
+  };
 
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
     if (currentScrollY > lastScrollY && currentScrollY > 50) {
-      // Scrolling down
       setIsVisible(false);
     } else {
-      // Scrolling up
       setIsVisible(true);
     }
     setLastScrollY(currentScrollY);
@@ -24,9 +35,7 @@ export default function Navbar() {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
   return (
@@ -44,36 +53,55 @@ export default function Navbar() {
 
           {/* Search Bar */}
           <div className="hidden md:flex items-center flex-1 max-w-2xl mx-8">
-            <button
+            <div
               onClick={() => setShowSearch(!showSearch)}
-              className="flex items-center w-full border border-gray-300 rounded-full px-6 py-2 shadow-sm hover:shadow-md transition-all"
+              className="flex items-center w-full border border-gray-300 rounded-full px-6 py-2 shadow-sm hover:shadow-md transition-all cursor-pointer"
             >
               <div className="flex-1 flex items-center divide-x divide-gray-300">
-                <span className="pr-4">Anywhere</span>
-                <span className="px-4">Any week</span>
-                <span className="pl-4 text-gray-600">Add guests</span>
+                <span className="pr-4">
+                  {searchParams.location || "Anywhere"}
+                </span>
+                <span className="px-4">{searchParams.dates || "Any week"}</span>
+                <span className="pl-4 text-gray-600">
+                  {searchParams.guests} guest
+                  {searchParams.guests !== 1 ? "s" : ""}
+                </span>
               </div>
-              <div className="bg-black p-2 rounded-full text-white">
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleSearch();
+                }}
+                className="bg-black p-2 rounded-full text-white cursor-pointer"
+              >
                 <Search size={16} />
               </div>
-            </button>
+            </div>
+          </div>
+
+          {/* Mobile Search */}
+          <div
+            className="md:hidden flex items-center space-x-2 border border-gray-300 rounded-full p-2 cursor-pointer"
+            onClick={() => setShowSearch(!showSearch)}
+          >
+            <Search size={20} />
           </div>
 
           {/* Language Selector and User Menu */}
           <div className="flex items-center space-x-4">
-            <button className="flex items-center px-4 py-2 rounded-full hover:shadow-md transition-all">
+            <div className="hidden md:flex items-center px-4 py-2 rounded-full hover:shadow-md transition-all cursor-pointer">
               <Globe className="w-4 h-4 mr-1" />
               <span className="text-sm">EN</span>
-            </button>
+            </div>
 
             <div className="relative">
-              <button
+              <div
                 onClick={() => setShowUserMenu(!showUserMenu)}
-                className="flex items-center space-x-2 border border-gray-300 rounded-full p-2 hover:shadow-md transition-all"
+                className="flex items-center space-x-2 border border-gray-300 rounded-full p-2 hover:shadow-md transition-all cursor-pointer"
               >
                 <Menu size={18} />
                 <User size={18} />
-              </button>
+              </div>
 
               {showUserMenu && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100">
@@ -100,11 +128,53 @@ export default function Navbar() {
 
       {/* Search Modal */}
       {showSearch && (
-        <div className="absolute top-20 left-0 w-full bg-white border-b border-gray-200 p-4">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-2 gap-4">
-              <LocationSearch />
-              <DatePicker />
+        <div className="absolute top-20 left-0 w-full bg-white border-b border-gray-200 p-4 shadow-lg">
+          <div className="max-w-3xl mx-auto space-y-4">
+            <LocationSearch
+              onSelect={(location) =>
+                setSearchParams((prev) => ({ ...prev, location }))
+              }
+            />
+            <DatePicker
+              onSelect={(dates) =>
+                setSearchParams((prev) => ({ ...prev, dates }))
+              }
+            />
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <label className="text-sm font-medium">Guests</label>
+                <div className="flex items-center space-x-2">
+                  <button
+                    className="p-1 border rounded-md"
+                    onClick={() =>
+                      setSearchParams((prev) => ({
+                        ...prev,
+                        guests: Math.max(1, prev.guests - 1),
+                      }))
+                    }
+                  >
+                    -
+                  </button>
+                  <span>{searchParams.guests}</span>
+                  <button
+                    className="p-1 border rounded-md"
+                    onClick={() =>
+                      setSearchParams((prev) => ({
+                        ...prev,
+                        guests: prev.guests + 1,
+                      }))
+                    }
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <button
+                onClick={handleSearch}
+                className="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition-colors"
+              >
+                Search
+              </button>
             </div>
           </div>
         </div>
