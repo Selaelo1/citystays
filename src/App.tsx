@@ -11,6 +11,7 @@ import Events from "./pages/Events";
 import Cars from "./pages/Cars";
 import Flights from "./pages/Flights";
 import Guides from "./pages/Guides";
+import DestinationStays from "./pages/DestinationStays";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/cars" element={<Cars />} />
             <Route path="/flights" element={<Flights />} />
             <Route path="/guides" element={<Guides />} />
+            <Route path="/destination/:city" element={<DestinationStays />} />
           </Routes>
         </main>
       </div>
