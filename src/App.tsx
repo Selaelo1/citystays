@@ -6,7 +6,7 @@ import StayDetails from "./pages/StayDetails";
 import BecomeHost from "./pages/BecomeHost";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import CategoryPage from "./pages/Categorypage";
+import CategoryPage from "./pages/CategoryPage";
 import Events from "./pages/Events";
 import Cars from "./pages/Cars";
 import Flights from "./pages/Flights";
