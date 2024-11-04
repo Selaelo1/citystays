@@ -1,7 +1,7 @@
 import Hero from "../components/Hero";
 import { Link } from "react-router-dom";
 import Categories from "../components/Categories";
-import ExploreOptions from "../components/Exploreoptions";
+import ExploreOptions from "../components/ExploreOptions";
 
 const africanDestinations = [
   {
