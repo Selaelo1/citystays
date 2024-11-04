@@ -1,16 +1,5 @@
 import { useState } from "react";
-import {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  Car,
-  Users,
-  Fuel,
-  Cog,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  Calendar,
-  MapPin,
-  Truck,
-  AlertCircle,
-} from "lucide-react";
+import { Users, Fuel, Cog, MapPin, Truck, AlertCircle } from "lucide-react";
 
 const rentalCompanies = [
   {
