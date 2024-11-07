@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import ClientDashboard from "../components/dashboard/ClientdashBoard";
+import ClientDashboard from "../components/dashboard/ClientDashboard";
 import HostDashboard from "../components/dashboard/HostDashboard";
 import AdminDashboard from "../components/dashboard/AdminDashboard";
 
