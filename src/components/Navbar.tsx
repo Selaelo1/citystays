@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, Search, User, Globe } from "lucide-react";
+import { Menu, Search, User, Globe, LogOut } from "lucide-react";
+import { useAuth } from "../contexts/AuthContext";
 import DatePicker from "./DatePicker";
 import LocationSearch from "./LocationSearch";
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
   const [showSearch, setShowSearch] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
@@ -21,6 +23,12 @@ export default function Navbar() {
       state: searchParams,
     });
     setShowSearch(false);
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+    setShowUserMenu(false);
   };
 
   const handleScroll = () => {
@@ -100,24 +108,52 @@ export default function Navbar() {
                 className="flex items-center space-x-2 border border-gray-300 rounded-full p-2 hover:shadow-md transition-all cursor-pointer"
               >
                 <Menu size={18} />
-                <User size={18} />
+                {user ? (
+                  <img
+                    src={user.avatar}
+                    alt={user.name}
+                    className="w-6 h-6 rounded-full"
+                  />
+                ) : (
+                  <User size={18} />
+                )}
               </div>
 
               {showUserMenu && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100">
                   <div className="py-1">
-                    <Link
-                      to="/login"
-                      className="block px-4 py-2 hover:bg-gray-100"
-                    >
-                      Log in
-                    </Link>
-                    <Link
-                      to="/signup"
-                      className="block px-4 py-2 hover:bg-gray-100"
-                    >
-                      Sign up
-                    </Link>
+                    {user ? (
+                      <>
+                        <Link
+                          to="/dashboard"
+                          className="block px-4 py-2 hover:bg-gray-100"
+                        >
+                          Dashboard
+                        </Link>
+                        <button
+                          onClick={handleLogout}
+                          className="flex items-center w-full px-4 py-2 hover:bg-gray-100 text-red-600"
+                        >
+                          <LogOut className="w-4 h-4 mr-2" />
+                          Log out
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <Link
+                          to="/login"
+                          className="block px-4 py-2 hover:bg-gray-100"
+                        >
+                          Log in
+                        </Link>
+                        <Link
+                          to="/signup"
+                          className="block px-4 py-2 hover:bg-gray-100"
+                        >
+                          Sign up
+                        </Link>
+                      </>
+                    )}
                   </div>
                 </div>
               )}
