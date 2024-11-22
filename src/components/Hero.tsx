@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 const Hero = () => {
   return (
-    <div className="relative h-[80vh] mb-16">
+    <div className="relative h-[90vh] mb-16">
       <img
         src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80"
         alt="Beautiful Villa"
