@@ -1,5 +1,5 @@
-import { X, Star } from "lucide-react";
-import { Review } from "../data/GuidesData";
+import { X, Star } from 'lucide-react';
+import { Review } from '../data/GuidesData';
 
 interface ReviewsModalProps {
   isOpen: boolean;
@@ -8,12 +8,7 @@ interface ReviewsModalProps {
   guideName: string;
 }
 
-export default function ReviewsModal({
-  isOpen,
-  onClose,
-  reviews,
-  guideName,
-}: ReviewsModalProps) {
+export default function ReviewsModal({ isOpen, onClose, reviews, guideName }: ReviewsModalProps) {
   if (!isOpen) return null;
 
   return (
@@ -28,22 +23,19 @@ export default function ReviewsModal({
             <X className="w-6 h-6" />
           </button>
         </div>
-
+        
         <div className="overflow-y-auto p-6 max-h-[60vh]">
           <div className="space-y-6">
             {reviews.map((review) => (
-              <div
-                key={review.id}
-                className="border-b border-gray-100 pb-6 last:border-0"
-              >
+              <div key={review.id} className="border-b border-gray-100 pb-6 last:border-0">
                 <div className="flex justify-between items-start mb-2">
                   <div>
                     <div className="font-semibold mb-1">{review.userName}</div>
                     <div className="text-sm text-gray-500">
-                      {new Date(review.date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
+                      {new Date(review.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
                       })}
                     </div>
                   </div>
@@ -52,9 +44,7 @@ export default function ReviewsModal({
                     <span className="ml-1 font-medium">{review.rating}</span>
                   </div>
                 </div>
-                <div className="text-sm text-gray-600 mb-2">
-                  {review.tourType}
-                </div>
+                <div className="text-sm text-gray-600 mb-2">{review.tourType}</div>
                 <p className="text-gray-700">{review.comment}</p>
               </div>
             ))}
