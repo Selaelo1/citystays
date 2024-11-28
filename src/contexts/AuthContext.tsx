@@ -1,26 +1,26 @@
-/* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useState, ReactNode } from "react";
-import { User, AuthContextType, MOCK_USERS } from "../types/auth";
+import { createContext, useContext, ReactNode } from "react";
+import { useAuthStore } from "../stores/useAuthStore";
+import type { User, AuthContextType } from "../types/auth";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const { user, setUser, logout } = useAuthStore();
 
   const login = async (email: string, password: string) => {
-    // Simulate API call delay
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      // Simulate API call delay
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    const mockUser = MOCK_USERS.find((u) => u.email === email);
-    if (!mockUser || password !== "password") {
-      throw new Error("Invalid credentials");
+      const mockUser = MOCK_USERS.find((u) => u.email === email);
+      if (!mockUser || password !== "password") {
+        throw new Error("Invalid credentials");
+      }
+
+      setUser(mockUser);
+    } catch (error) {
+      throw error;
     }
-
-    setUser(mockUser);
-  };
-
-  const logout = () => {
-    setUser(null);
   };
 
   return (
@@ -37,3 +37,28 @@ export function useAuth() {
   }
   return context;
 }
+
+// Mock users for testing
+const MOCK_USERS: User[] = [
+  {
+    id: "1",
+    email: "client@example.com",
+    name: "John Client",
+    role: "client",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80",
+  },
+  {
+    id: "2",
+    email: "host@example.com",
+    name: "Sarah Host",
+    role: "host",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80",
+  },
+  {
+    id: "3",
+    email: "admin@example.com",
+    name: "Mike Admin",
+    role: "admin",
+    avatar: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&q=80",
+  },
+];
