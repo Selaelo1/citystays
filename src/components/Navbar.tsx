@@ -1,14 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, Search, User, Globe, LogOut } from "lucide-react";
-import { useAuth } from "../contexts/AuthContext";
+import { Menu, Search, User, Globe } from "lucide-react";
 import DatePicker from "./DatePicker";
 import LocationSearch from "./LocationSearch";
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
   const [showSearch, setShowSearch] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
@@ -16,20 +13,14 @@ export default function Navbar() {
   const [searchParams, setSearchParams] = useState({
     location: "",
     dates: "",
-    guests: 1,
+    guests: 1
   });
 
   const handleSearch = () => {
-    navigate("/search", {
-      state: searchParams,
+    navigate('/search', { 
+      state: searchParams
     });
     setShowSearch(false);
-  };
-
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-    setShowUserMenu(false);
   };
 
   const handleScroll = () => {
@@ -62,21 +53,18 @@ export default function Navbar() {
 
           {/* Search Bar */}
           <div className="hidden md:flex items-center flex-1 max-w-2xl mx-8">
-            <div
+            <div 
               onClick={() => setShowSearch(!showSearch)}
               className="flex items-center w-full border border-gray-300 rounded-full px-6 py-2 shadow-sm hover:shadow-md transition-all cursor-pointer"
             >
               <div className="flex-1 flex items-center divide-x divide-gray-300">
-                <span className="pr-4">
-                  {searchParams.location || "Anywhere"}
-                </span>
+                <span className="pr-4">{searchParams.location || "Anywhere"}</span>
                 <span className="px-4">{searchParams.dates || "Any week"}</span>
                 <span className="pl-4 text-gray-600">
-                  {searchParams.guests} guest
-                  {searchParams.guests !== 1 ? "s" : ""}
+                  {searchParams.guests} guest{searchParams.guests !== 1 ? 's' : ''}
                 </span>
               </div>
-              <div
+              <div 
                 onClick={(e) => {
                   e.stopPropagation();
                   handleSearch();
@@ -109,52 +97,24 @@ export default function Navbar() {
                 className="flex items-center space-x-2 border border-gray-300 rounded-full p-2 hover:shadow-md transition-all cursor-pointer"
               >
                 <Menu size={18} />
-                {user ? (
-                  <img
-                    src={user.avatar}
-                    alt={user.name}
-                    className="w-6 h-6 rounded-full"
-                  />
-                ) : (
-                  <User size={18} />
-                )}
+                <User size={18} />
               </div>
 
               {showUserMenu && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100">
                   <div className="py-1">
-                    {user ? (
-                      <>
-                        <Link
-                          to="/dashboard"
-                          className="block px-4 py-2 hover:bg-gray-100"
-                        >
-                          Dashboard
-                        </Link>
-                        <button
-                          onClick={handleLogout}
-                          className="flex items-center w-full px-4 py-2 hover:bg-gray-100 text-red-600"
-                        >
-                          <LogOut className="w-4 h-4 mr-2" />
-                          Log out
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <Link
-                          to="/login"
-                          className="block px-4 py-2 hover:bg-gray-100"
-                        >
-                          Log in
-                        </Link>
-                        <Link
-                          to="/signup"
-                          className="block px-4 py-2 hover:bg-gray-100"
-                        >
-                          Sign up
-                        </Link>
-                      </>
-                    )}
+                    <Link
+                      to="/login"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Log in
+                    </Link>
+                    <Link
+                      to="/signup"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Sign up
+                    </Link>
                   </div>
                 </div>
               )}
@@ -167,15 +127,11 @@ export default function Navbar() {
       {showSearch && (
         <div className="absolute top-20 left-0 w-full bg-white border-b border-gray-200 p-4 shadow-lg">
           <div className="max-w-3xl mx-auto space-y-4">
-            <LocationSearch
-              onSelect={(location) =>
-                setSearchParams((prev) => ({ ...prev, location }))
-              }
+            <LocationSearch 
+              onSelect={(location) => setSearchParams(prev => ({ ...prev, location }))}
             />
-            <DatePicker
-              onSelect={(dates) =>
-                setSearchParams((prev) => ({ ...prev, dates }))
-              }
+            <DatePicker 
+              onSelect={(dates) => setSearchParams(prev => ({ ...prev, dates }))}
             />
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
@@ -183,24 +139,20 @@ export default function Navbar() {
                 <div className="flex items-center space-x-2">
                   <button
                     className="p-1 border rounded-md"
-                    onClick={() =>
-                      setSearchParams((prev) => ({
-                        ...prev,
-                        guests: Math.max(1, prev.guests - 1),
-                      }))
-                    }
+                    onClick={() => setSearchParams(prev => ({ 
+                      ...prev, 
+                      guests: Math.max(1, prev.guests - 1)
+                    }))}
                   >
                     -
                   </button>
                   <span>{searchParams.guests}</span>
                   <button
                     className="p-1 border rounded-md"
-                    onClick={() =>
-                      setSearchParams((prev) => ({
-                        ...prev,
-                        guests: prev.guests + 1,
-                      }))
-                    }
+                    onClick={() => setSearchParams(prev => ({ 
+                      ...prev, 
+                      guests: prev.guests + 1
+                    }))}
                   >
                     +
                   </button>
