@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { FEATURED_DESTINATIONS } from "../components/FeaturedDestinations";
+import { FEATURED_DESTINATIONS } from "../data/destinations";
 import { Star, MapPin } from "lucide-react";
 
 export default function DestinationStays() {
