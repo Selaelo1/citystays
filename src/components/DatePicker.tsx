@@ -21,10 +21,7 @@ export default function DatePicker({ onSelect }: DatePickerProps) {
         setEndDate(null);
       } else {
         setEndDate(date);
-        const dateRange = `${format(startDate, "MMM d")} - ${format(
-          date,
-          "MMM d"
-        )}`;
+        const dateRange = `${format(startDate, 'MMM d')} - ${format(date, 'MMM d')}`;
         onSelect(dateRange);
         setShowCalendar(false);
       }
@@ -36,7 +33,7 @@ export default function DatePicker({ onSelect }: DatePickerProps) {
 
   return (
     <div className="relative">
-      <div
+      <div 
         className="flex items-center space-x-4 p-4 border border-gray-200 rounded-lg cursor-pointer"
         onClick={() => setShowCalendar(!showCalendar)}
       >
@@ -45,7 +42,7 @@ export default function DatePicker({ onSelect }: DatePickerProps) {
           <div className="font-medium">When</div>
           <div className="text-sm text-gray-500">
             {startDate && endDate
-              ? `${format(startDate, "MMM d")} - ${format(endDate, "MMM d")}`
+              ? `${format(startDate, 'MMM d')} - ${format(endDate, 'MMM d')}`
               : "Add dates"}
           </div>
         </div>
@@ -55,23 +52,15 @@ export default function DatePicker({ onSelect }: DatePickerProps) {
         <div className="absolute top-full left-0 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
           <div className="p-4">
             <div className="grid grid-cols-7 gap-1">
-              {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((day) => (
+              {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
                 <div key={day} className="text-center text-sm font-medium p-2">
                   {day}
                 </div>
               ))}
               {dates.map((date, i) => {
-                const isSelected =
-                  startDate &&
-                  date >= startDate &&
-                  (!endDate || date <= endDate);
-                const isStart =
-                  startDate &&
-                  format(date, "yyyy-MM-dd") ===
-                    format(startDate, "yyyy-MM-dd");
-                const isEnd =
-                  endDate &&
-                  format(date, "yyyy-MM-dd") === format(endDate, "yyyy-MM-dd");
+                const isSelected = startDate && date >= startDate && (!endDate || date <= endDate);
+                const isStart = startDate && format(date, 'yyyy-MM-dd') === format(startDate, 'yyyy-MM-dd');
+                const isEnd = endDate && format(date, 'yyyy-MM-dd') === format(endDate, 'yyyy-MM-dd');
 
                 return (
                   <button
@@ -79,14 +68,12 @@ export default function DatePicker({ onSelect }: DatePickerProps) {
                     onClick={() => handleDateSelect(date)}
                     className={`
                       p-2 text-center rounded-lg transition-colors
-                      ${
-                        isSelected ? "bg-black text-white" : "hover:bg-gray-100"
-                      }
-                      ${isStart ? "rounded-l-lg" : ""}
-                      ${isEnd ? "rounded-r-lg" : ""}
+                      ${isSelected ? 'bg-black text-white' : 'hover:bg-gray-100'}
+                      ${isStart ? 'rounded-l-lg' : ''}
+                      ${isEnd ? 'rounded-r-lg' : ''}
                     `}
                   >
-                    {format(date, "d")}
+                    {format(date, 'd')}
                   </button>
                 );
               })}
