@@ -1,6 +1,6 @@
-import { useParams } from "react-router-dom";
-import { CATEGORIES } from "../data/CategoryData";
-import { Star, Clock, MapPin } from "lucide-react";
+import { useParams } from 'react-router-dom';
+import { CATEGORIES } from '../data/CategoryData';
+import { Star, Clock, MapPin } from 'lucide-react';
 
 export default function CategoryPage() {
   const { id } = useParams<{ id: string }>();
@@ -38,7 +38,7 @@ export default function CategoryPage() {
             <div className="p-6">
               <h3 className="text-xl font-bold mb-2">{activity.title}</h3>
               <p className="text-gray-600 mb-4">{activity.description}</p>
-
+              
               <div className="flex items-center space-x-4 mb-4">
                 <div className="flex items-center">
                   <Star className="w-5 h-5 text-yellow-500 mr-1" />
@@ -69,5 +69,4 @@ export default function CategoryPage() {
         ))}
       </div>
     </div>
-  );
-}
+  )};
