@@ -1,5 +1,3 @@
-// StayData.tsx
-
 export type Stay = {
   id: string;
   title: string;
@@ -19,14 +17,14 @@ export type Stay = {
   };
   rating: number;
   reviews: number;
+  maxGuests: number; // Added maxGuests property
 };
 
 export const SAMPLE_STAYS: Stay[] = [
   {
     id: "1",
     title: "Luxury Apartment with Eiffel Tower View",
-    description:
-      "Beautiful apartment in the heart of Paris with stunning views.",
+    description: "Beautiful apartment in the heart of Paris with stunning views.",
     location: {
       city: "Paris",
       country: "France",
@@ -48,6 +46,7 @@ export const SAMPLE_STAYS: Stay[] = [
     },
     rating: 4.9,
     reviews: 128,
+    maxGuests: 4
   },
   {
     id: "2",
@@ -74,6 +73,7 @@ export const SAMPLE_STAYS: Stay[] = [
     },
     rating: 4.8,
     reviews: 65,
+    maxGuests: 6
   },
   {
     id: "3",
@@ -100,135 +100,6 @@ export const SAMPLE_STAYS: Stay[] = [
     },
     rating: 4.7,
     reviews: 50,
-  },
-  {
-    id: "4",
-    title: "Luxury Safari Lodge in Kruger Park",
-    description: "Experience the wildlife up close in a luxurious lodge.",
-    location: {
-      city: "Kruger National Park",
-      country: "South Africa",
-      coordinates: [-23.9884, 31.5505],
-    },
-    price: 450,
-    images: [
-      "https://www.go2africa.com/wp-content/uploads/2017/08/Guest-area_Lion-Sands.jpg",
-      "https://images.unsplash.com/photo-1603719488952-0dc48d6cd8a4",
-      "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
-      "https://images.unsplash.com/photo-1549551559-1a63d4c93e5f",
-      "https://images.unsplash.com/photo-1561601031-f9e4900c4b4b",
-    ],
-    amenities: ["Wifi", "Full board", "Guided tours"],
-    host: {
-      id: "h4",
-      name: "David Baker",
-      avatar: "https://images.unsplash.com/photo-1543982426-3b391e41e7b6",
-    },
-    rating: 5.0,
-    reviews: 80,
-  },
-  {
-    id: "5",
-    title: "Beachfront Bungalow in Durban",
-    description: "Relax in a beautiful bungalow right on the beach.",
-    location: {
-      city: "Durban",
-      country: "South Africa",
-      coordinates: [-29.8587, 31.0218],
-    },
-    price: 200,
-    images: [
-      "https://www.afristay.com/media/thumbnails/pictures/places/7386/1_HO0Obhb.jpg.1366x768_q85_crop_upscale.jpg",
-      "https://images.unsplash.com/photo-1520663873896-35825d8c7f5e",
-      "https://images.unsplash.com/photo-1510528962110-3c2c7c7b45b5",
-      "https://images.unsplash.com/photo-1576167791051-92e60e2f7b57",
-      "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
-    ],
-    amenities: ["Wifi", "Kitchen", "Beach access"],
-    host: {
-      id: "h5",
-      name: "Sarah Patel",
-      avatar: "https://images.unsplash.com/photo-1506811671512-8e8d9c836d64",
-    },
-    rating: 4.6,
-    reviews: 40,
-  },
-  {
-    id: "6",
-    title: "Chalet in Lesotho Mountains",
-    description: "Enjoy a peaceful getaway in the mountains of Lesotho.",
-    location: {
-      city: "Mokhotlong",
-      country: "Lesotho",
-      coordinates: [-29.586, 29.161],
-    },
-    price: 100,
-    images: [
-      "https://static.wixstatic.com/media/157efe_909a36cb0d1a4d958a5b08515e0e140d~mv2.jpg/v1/fill/w_640,h_770,al_b,q_85,usm_0.66_1.00_0.01,enc_auto/157efe_909a36cb0d1a4d958a5b08515e0e140d~mv2.jpg",
-      "https://images.unsplash.com/photo-1580321171800-101be0e3643d",
-      "https://images.unsplash.com/photo-1517860283000-8e453af3a86b",
-      "https://images.unsplash.com/photo-1582567487168-4d292fdf8d07",
-      "https://images.unsplash.com/photo-1604082356452-90dcde22fbd0",
-    ],
-    amenities: ["Wifi", "Kitchen", "Fireplace"],
-    host: {
-      id: "h6",
-      name: "Thabo Nkosi",
-      avatar: "https://images.unsplash.com/photo-1596503877500-bc9ee6d7b1b6",
-    },
-    rating: 4.5,
-    reviews: 30,
-  },
-  {
-    id: "7",
-    title: "Luxurious Stay in Gaborone",
-    description: "A modern stay in Botswana's capital city.",
-    location: {
-      city: "Gaborone",
-      country: "Botswana",
-      coordinates: [-24.6282, 25.9236],
-    },
-    price: 180,
-    images: [
-      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/b4/76/03/exterior.jpg?w=1200&h=-1&s=1",
-      "https://images.unsplash.com/photo-1614795546935-29e9e7cdb4aa",
-      "https://images.unsplash.com/photo-1584071137273-e33a58979f61",
-      "https://images.unsplash.com/photo-1593285001541-f53b34015f58",
-      "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
-    ],
-    amenities: ["Wifi", "Air conditioning", "Pool"],
-    host: {
-      id: "h7",
-      name: "Bontle Moyo",
-      avatar: "https://images.unsplash.com/photo-1560732174-4dd50f408b93",
-    },
-    rating: 4.9,
-    reviews: 20,
-  },
-  {
-    id: "8",
-    title: "Boutique Hotel in Windhoek",
-    description: "A stylish boutique hotel in Namibia's capital.",
-    location: {
-      city: "Windhoek",
-      country: "Namibia",
-      coordinates: [-22.5597, 17.0833],
-    },
-    price: 220,
-    images: [
-      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/3f/6a/d5/the-windhoek-luxury-suites.jpg?w=700&h=-1&s=1",
-      "https://images.unsplash.com/photo-1559081025-2e3d6768da54",
-      "https://images.unsplash.com/photo-1564866667326-123456789abc",
-      "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
-      "https://images.unsplash.com/photo-1571603389568-d5e4051049b3",
-    ],
-    amenities: ["Wifi", "Restaurant", "Bar"],
-    host: {
-      id: "h8",
-      name: "Maria van der Merwe",
-      avatar: "https://images.unsplash.com/photo-1564866667326-123456789abc",
-    },
-    rating: 4.8,
-    reviews: 75,
-  },
+    maxGuests: 4
+  }
 ];
