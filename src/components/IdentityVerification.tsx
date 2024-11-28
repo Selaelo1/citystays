@@ -1,8 +1,8 @@
-import { Upload, FileCheck, AlertCircle } from "lucide-react";
+import { Upload, FileCheck, AlertCircle } from 'lucide-react';
 
 interface IdentityVerificationProps {
   onFileSelect: (files: FileList) => void;
-  type: "host" | "guest";
+  type: 'host' | 'guest';
 }
 
 export default function IdentityVerification({
@@ -25,9 +25,9 @@ export default function IdentityVerification({
               Identity Verification Required
             </h3>
             <p className="mt-2 text-sm text-yellow-700">
-              {type === "host"
-                ? "To ensure the safety and trust of our community, we require hosts to verify their identity and property ownership."
-                : "To create a secure environment, we require all users to verify their identity."}
+              {type === 'host'
+                ? 'To ensure the safety and trust of our community, we require hosts to verify their identity and property ownership.'
+                : 'To create a secure environment, we require all users to verify their identity.'}
             </p>
           </div>
         </div>
@@ -49,15 +49,15 @@ export default function IdentityVerification({
               <div className="text-center">
                 <Upload className="mx-auto h-12 w-12 text-gray-400" />
                 <p className="mt-2 text-sm text-gray-600">
-                  Upload a clear photo of your ID (passport, driver's license,
-                  or national ID)
+                  Upload a clear photo of your ID (passport, driver's license, or
+                  national ID)
                 </p>
               </div>
             </div>
           </label>
         </div>
 
-        {type === "host" && (
+        {type === 'host' && (
           <div>
             <h4 className="text-sm font-medium text-gray-900 mb-2">
               Property Ownership Proof
@@ -73,8 +73,7 @@ export default function IdentityVerification({
                 <div className="text-center">
                   <FileCheck className="mx-auto h-12 w-12 text-gray-400" />
                   <p className="mt-2 text-sm text-gray-600">
-                    Upload property deed, recent utility bill, or rental
-                    agreement
+                    Upload property deed, recent utility bill, or rental agreement
                   </p>
                 </div>
               </div>
@@ -86,8 +85,8 @@ export default function IdentityVerification({
       <div className="text-sm text-gray-500">
         <p>Accepted file formats: PNG, JPG, PDF (max 10MB)</p>
         <p className="mt-1">
-          Your documents are encrypted and securely stored. They will only be
-          used for verification purposes.
+          Your documents are encrypted and securely stored. They will only be used
+          for verification purposes.
         </p>
       </div>
     </div>
