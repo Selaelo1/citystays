@@ -9,7 +9,7 @@ const POPULAR_CITIES = [
   "Port Elizabeth, South Africa",
   "Stellenbosch, South Africa",
   "Kruger National Park, South Africa",
-  "Bloemfontein, South Africa",
+  "Bloemfontein, South Africa"
 ];
 
 interface LocationSearchProps {
@@ -20,7 +20,7 @@ export default function LocationSearch({ onSelect }: LocationSearchProps) {
   const [search, setSearch] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const filteredCities = POPULAR_CITIES.filter((city) =>
+  const filteredCities = POPULAR_CITIES.filter(city =>
     city.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -45,7 +45,7 @@ export default function LocationSearch({ onSelect }: LocationSearchProps) {
         <div className="absolute top-full left-0 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
           <div className="p-4">
             <h3 className="text-sm font-medium text-gray-500 mb-2">
-              {search ? "Search results" : "Popular destinations"}
+              {search ? 'Search results' : 'Popular destinations'}
             </h3>
             {filteredCities.length > 0 ? (
               filteredCities.map((city) => (
