@@ -1,39 +1,28 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 interface SeatMapProps {
   selectedSeats: string[];
   onSeatSelect: (seat: string) => void;
   maxSeats: number;
-  travelClass: "economy" | "business" | "firstClass";
+  travelClass: 'economy' | 'business' | 'firstClass';
 }
 
-export default function SeatMap({
-  selectedSeats,
-  onSeatSelect,
-  maxSeats,
-  travelClass,
-}: SeatMapProps) {
-  const rows =
-    travelClass === "economy"
-      ? ["A", "B", "C", "D", "E", "F"]
-      : travelClass === "business"
-      ? ["A", "B", "C", "D"]
-      : ["A", "B"];
-
+export default function SeatMap({ selectedSeats, onSeatSelect, maxSeats, travelClass }: SeatMapProps) {
+  const rows = travelClass === 'economy' 
+    ? ['A', 'B', 'C', 'D', 'E', 'F'] 
+    : travelClass === 'business'
+    ? ['A', 'B', 'C', 'D']
+    : ['A', 'B'];
+    
   const columns = Array.from(
-    {
-      length:
-        travelClass === "economy" ? 30 : travelClass === "business" ? 15 : 10,
-    },
+    { length: travelClass === 'economy' ? 30 : travelClass === 'business' ? 15 : 10 }, 
     (_, i) => i + 1
   );
-
+  
   // Simulate some randomly occupied seats
   const [occupiedSeats] = useState(() => {
     const seats = new Set<string>();
-    const numOccupied = Math.floor(
-      Math.random() * (travelClass === "economy" ? 50 : 20)
-    );
+    const numOccupied = Math.floor(Math.random() * (travelClass === 'economy' ? 50 : 20));
     for (let i = 0; i < numOccupied; i++) {
       const row = rows[Math.floor(Math.random() * rows.length)];
       const col = columns[Math.floor(Math.random() * columns.length)];
@@ -52,9 +41,9 @@ export default function SeatMap({
   };
 
   const getSeatStatus = (seat: string) => {
-    if (occupiedSeats.has(seat)) return "occupied";
-    if (selectedSeats.includes(seat)) return "selected";
-    return "available";
+    if (occupiedSeats.has(seat)) return 'occupied';
+    if (selectedSeats.includes(seat)) return 'selected';
+    return 'available';
   };
 
   return (
@@ -81,18 +70,9 @@ export default function SeatMap({
           </div>
         </div>
 
-        <div
-          className="grid grid-flow-col gap-2"
-          style={{ width: "max-content" }}
-        >
+        <div className="grid grid-flow-col gap-2" style={{ width: 'max-content' }}>
           {columns.map((col) => (
-            <div
-              key={col}
-              className="grid gap-2"
-              style={{
-                gridTemplateRows: `repeat(${rows.length}, minmax(0, 1fr))`,
-              }}
-            >
+            <div key={col} className="grid gap-2" style={{ gridTemplateRows: `repeat(${rows.length}, minmax(0, 1fr))` }}>
               {rows.map((row) => {
                 const seat = `${row}${col}`;
                 const status = getSeatStatus(seat);
@@ -100,21 +80,13 @@ export default function SeatMap({
                   <button
                     key={seat}
                     onClick={() => handleSeatClick(seat)}
-                    disabled={status === "occupied"}
+                    disabled={status === 'occupied'}
                     className={`
                       w-8 h-8 rounded flex items-center justify-center text-sm
-                      ${
-                        status === "occupied"
-                          ? "bg-gray-400 cursor-not-allowed"
-                          : ""
-                      }
-                      ${status === "selected" ? "bg-black text-white" : ""}
-                      ${
-                        status === "available"
-                          ? "bg-gray-200 hover:bg-gray-300"
-                          : ""
-                      }
-                      ${travelClass !== "economy" ? "w-12 h-12" : ""}
+                      ${status === 'occupied' ? 'bg-gray-400 cursor-not-allowed' : ''}
+                      ${status === 'selected' ? 'bg-black text-white' : ''}
+                      ${status === 'available' ? 'bg-gray-200 hover:bg-gray-300' : ''}
+                      ${travelClass !== 'economy' ? 'w-12 h-12' : ''}
                     `}
                   >
                     {seat}
