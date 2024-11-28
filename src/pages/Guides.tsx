@@ -10,7 +10,7 @@ export default function Guides() {
     setSelectedGuide(guideId);
   };
 
-  const selectedGuideData = GUIDES.find((guide) => guide.id === selectedGuide);
+  const selectedGuideData = GUIDES.find(guide => guide.id === selectedGuide);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-16">
@@ -29,7 +29,7 @@ export default function Guides() {
                 </div>
                 <div>
                   <h2 className="text-2xl font-bold">{guide.name}</h2>
-                  <button
+                  <button 
                     onClick={() => handleReviewsClick(guide.id)}
                     className="flex items-center text-gray-600 hover:text-black transition-colors"
                   >
