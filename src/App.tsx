@@ -2,9 +2,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { QueryProvider } from "./providers/QueryProvider";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Stays from "./pages/Stays";
 import StayDetails from "./pages/StayDetails";
+import BookingPage from "./pages/BookingPage";
 import BecomeHost from "./pages/BecomeHost";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -21,13 +23,14 @@ export default function App() {
     <QueryProvider>
       <AuthProvider>
         <Router>
-          <div className="min-h-screen bg-white">
+          <div className="min-h-screen flex flex-col bg-white">
             <Navbar />
-            <main className="pt-20">
+            <main className="flex-grow pt-20">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/stays" element={<Stays />} />
                 <Route path="/stays/:id" element={<StayDetails />} />
+                <Route path="/stays/:id/book" element={<BookingPage />} />
                 <Route path="/become-host" element={<BecomeHost />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
@@ -40,6 +43,7 @@ export default function App() {
                 <Route path="/destination/:city" element={<DestinationStays />} />
               </Routes>
             </main>
+            <Footer />
           </div>
         </Router>
       </AuthProvider>
